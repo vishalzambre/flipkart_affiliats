@@ -17,4 +17,5 @@ Installation
 git clone git@github.com:vishalzambre/flipkart_affiliats.git
 gem install rest-client
 gem install sinatra
-gem install 
+cd flipkart_affiliats
+rackup
