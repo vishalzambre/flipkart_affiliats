@@ -10,3 +10,11 @@ Flipkart API seemed difficult to use, probably because it is still in beta. Here
     The response will contain details of 50 products in the selected category. Even out-of-stock and discontinued items are displayed, and the API does not provide an option to sort the list or to exclude unnecessary items.
     To retrieve the next 50 items, the nextUrl link in the previous response should be used. If you need to use the data in a meaningful way, you'll need to save the entire data into a database, and take care of syncing the changes frequently.
 
+
+
+Installation
+
+git clone git@github.com:vishalzambre/flipkart_affiliats.git
+gem install rest-client
+gem install sinatra
+gem install 
