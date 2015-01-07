@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title >Shopping Dukan</title>
+  </head>
+  <body>
+    <h1>API Homepage </h1>Click on a category link to show available products from that category.
+    <table border=2 style="text-align:center;">
+      <%@lists.each_slice(3) do |list| %>
+        <tr>
+        <% list.each do |key, value| %>
+    			<td>
+  	    	  <a href='/products?url=<%= Base64.encode64(value['availableVariants']['v0.1.0']['get'])%>'>
+  	    		 <%= value['apiName'] %> &raquo;
+  	    	  </a>
+          </td>
+        <%end%>
+        </tr>
+      <%end%>
+   </table>
+  </body>
+</html>

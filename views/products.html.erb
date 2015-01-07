@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-#W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Shopping Dukan</title>
+  </head>
+  <body>
+		<h2><a href="/">HOME</a> | <a href="/products?url=<%= Base64.encode64(@nextUrl)%>">NEXT >></a></h2>
+		<table border=2 cellpadding=10 cellspacing=1 style='text-align:center'>
+			<% @products.each_slice(3) do |product_row| %>
+				<tr>
+	  		<% product_row.each do |product|
+					inStock = product['productBaseInfo']['productAttributes']['inStock']
+					#The API returns these values nested inside the array.
+					#Only image, price, url and title are used in this demo
+					productId = product['productBaseInfo']['productIdentifier']['productId']
+					title = product['productBaseInfo']['productAttributes']['title']
+					productDescription = product['productBaseInfo']['productAttributes']['productDescription']
+					#We take the 200x200 image, there are other sizes too.
+					productImage = product['productBaseInfo']['productAttributes']['imageUrls']['200x200'] rescue ''
+					sellingPrice = product['productBaseInfo']['productAttributes']['sellingPrice']['amount']
+					productUrl = product['productBaseInfo']['productAttributes']['productUrl']
+					productBrand = product['productBaseInfo']['productAttributes']['productBrand']
+					color = product['productBaseInfo']['productAttributes']['color']
+					#Setting up the table rows/columns for a 3x3 view.
+				%>
+					<td>
+						<a target="_blank" href='<%= productUrl %>'>
+		    			<img src="<%= productImage %>"/><br><%= title %> </a>
+		    		</a>
+		    		<br>
+		    		Rs. <%= sellingPrice %> <%= inStock ? '<p>In Stock</p>' : '<p>Out of Stock</p>' %>
+		  		</td>
+	    	<%end%>	
+	    	</tr>
+	    <%end%>	
+		</table>
+		<a href="/products?url=<%= Base64.encode64(@nextUrl)%>">NEXT >></a>
+	</body>
+</html>
